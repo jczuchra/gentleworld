@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
+import PostList from '../projects/PostList';
 
-export default function Dashboard() {
-    return (
-        <div>
-            <h1>Dsahboard</h1>
-        </div>
-    )
+export default class Dashboard extends Component {
+
+    render() {
+        return (
+            <div>
+                <PostList />
+            </div>
+        )
+    }
 }

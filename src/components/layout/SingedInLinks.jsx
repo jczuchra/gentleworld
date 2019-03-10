@@ -6,8 +6,8 @@ export default function SingedInLinks() {
         <div className="right">
             <ul>
                 <li><NavLink className="black-text" to="/create">New project</NavLink></li>
-                <li><NavLink className="black-text" to="/">Logout</NavLink></li>
-                <li><NavLink className="btn btn-floating white black-text" to="/">JC</NavLink></li>
+                <li><NavLink className="black-text" exact to="/">Logout</NavLink></li>
+                <li><NavLink className="btn btn-floating white black-text" exact to="/">JC</NavLink></li>
             </ul>
         </div>
     )
