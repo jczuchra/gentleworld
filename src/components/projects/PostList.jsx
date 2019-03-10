@@ -9,11 +9,17 @@ export default class PostList extends Component {
             { title: "Polskie cebule zlotem narodu", content: "blah blah blah blah", id: 3 },
         ]
     }
+    mapPosts = () => {
+        return this.state.posts.map(post => <SinglePost title={post.title} content={post.content} key={post.id} />)
+    }
     render() {
         return (
-            <div className="collection container section">
-                <SinglePost />
-                <SinglePost />
+            <div className="container section">
+                <div className="row">
+                    <div className="col s12 l6 collection ">
+                        {this.mapPosts()}
+                    </div>
+                </div>
             </div>
         )
     }
