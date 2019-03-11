@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const PostList = ({ posts }) => {
     const mapPosts = () => {
-        return posts.map(post => <SinglePost title={post.title} content={post.content} key={post.id} />)
+        return posts.map(post => <SinglePost title={post.title} content={post.content} key={post.id} id={post.id} />)
     }
     return (
         <div className="container section">

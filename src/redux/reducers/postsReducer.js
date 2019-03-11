@@ -8,7 +8,6 @@ const initState = {
 };
 
 const postReducer = (state = initState, action) => {
-    console.log(action);
     switch (action.type) {
         case 'CREATE_POST':
             return {
