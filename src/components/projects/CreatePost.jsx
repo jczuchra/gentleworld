@@ -6,7 +6,6 @@ class CreatePost extends Component {
     state = {
         title: "",
         content: "",
-        user: "",
         date: new Date()
     }
     handleChange = (e) => {
