@@ -8,7 +8,7 @@ export const createPost = post => {
             ...post,
             authorFirstName: 'Jay',
             authorLastName: 'Ce',
-            id: 12345
+            userId: 12345
         }).then(() => {
             dispatch({ type: 'CREATE_POST', post })
         }).catch(error => {

@@ -3,7 +3,6 @@ import SinglePost from './SinglePost';
 
 
 const PostList = ({ posts }) => {
-    console.log(posts);
     const mapPosts = posts ?
         posts.map(post => <SinglePost title={post.title} content={post.content} key={post.id} id={post.id} />) : (<h4 className="center">There is no posts yet.</h4>)
 
