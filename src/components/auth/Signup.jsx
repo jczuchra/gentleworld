@@ -1,9 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { signUp } from '../../redux/actions/authActions';
 
-export default class SignUp extends Component {
+class SignUp extends Component {
     state = {
-        first_name: "",
-        last_name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         password: ""
     }
@@ -15,20 +18,21 @@ export default class SignUp extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        this.props.signUp(this.state)
     }
     render() {
+        if (this.props.auth.uid) return <Redirect to="/" />
         return (
             <div className="container">
                 <h2 className="center">Sign up</h2>
                 <form onSubmit={this.handleSubmit}>
                     <div className="input-field">
-                        <label htmlFor="first_name">First name</label>
-                        <input type="text" id="first_name" onChange={this.handleChange} />
+                        <label htmlFor="firstName">First name</label>
+                        <input type="text" id="firstName" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
-                        <label htmlFor="last_name">Last name</label>
-                        <input type="text" id="last_name" onChange={this.handleChange} />
+                        <label htmlFor="lastName">Last name</label>
+                        <input type="text" id="lastName" onChange={this.handleChange} />
                     </div>
                     <div className="input-field">
                         <label htmlFor="email">Email</label>
@@ -41,9 +45,24 @@ export default class SignUp extends Component {
                     <div className="input-field">
                         <button className="btn black">Sign in</button>
                     </div>
+                    {this.props.authError ? <p className="red-text center">{this.props.authError}</p> : null}
                 </form>
             </div>
         )
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        authError: state.auth.authError
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUp: newUser => dispatch(signUp(newUser))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
