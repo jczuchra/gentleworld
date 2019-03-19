@@ -3,13 +3,14 @@ import logo from '../../img/logo.png';
 import SingedInLinks from './SingedInLinks';
 import SignedOutLinks from './SingedOutLinks';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 
 const Navbar = (props) => {
-    const links = props.auth.uid ? <SingedInLinks /> : <SignedOutLinks />;
+    const links = props.auth.uid ? <SingedInLinks profile={props.profile} /> : <SignedOutLinks />;
     return (
         <nav className="nav-wrapper grey lighten-3">
             <div className="container">
-                <div className="brand-logo"><img src={logo} alt="" /></div>
+                <Link to="/"><div className="brand-logo"><img src={logo} alt="" /></div></Link>
                 {links}
             </div>
         </nav>
@@ -17,8 +18,10 @@ const Navbar = (props) => {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
     }
 }
 
