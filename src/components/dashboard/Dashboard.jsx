@@ -7,7 +7,6 @@ import { Redirect } from 'react-router-dom';
 import Notifications from './Notifications';
 
 class Dashboard extends Component {
-
     render() {
         if (!this.props.auth.uid) return <Redirect to="/signin" />
         return (
@@ -17,7 +16,7 @@ class Dashboard extends Component {
                         <PostList posts={this.props.posts} />
                     </div>
                     <div className="col s12 l5 right">
-                        <Notifications />
+                        <Notifications notifications={this.props.notifications} />
                     </div>
                 </div>
             </div>
@@ -28,13 +27,15 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
     return {
         posts: state.firestore.ordered.posts,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        notifications: state.firestore.ordered.notifications
     }
 }
 
 export default compose(
     connect(mapStateToProps),
-    firestoreConnect([{
-        collection: 'posts'
-    }])
+    firestoreConnect([
+        { collection: 'posts', orderBy: ['date', 'desc'] },
+        { collection: 'notifications', limit: 3, orderBy: ['time', 'desc'] }
+    ])
 )(Dashboard);
